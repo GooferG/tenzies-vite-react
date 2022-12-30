@@ -1,17 +1,24 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css';
 import Die from './components/Die';
 
 function App() {
-  const [count, setCount] = useState(0);
+  const [dice, setDice] = useState(allNewDice());
 
-  const allNewDice = () => {
-    const randomNumArr = [];
+  function allNewDice() {
+    const newDice = [];
     for (let i = 0; i < 10; i++) {
-      randomNumArr.push(Math.floor(Math.random() * 7));
+      newDice.push(Math.ceil(Math.random() * 6));
     }
-    console.log(randomNumArr);
-  };
+    return newDice;
+  }
+
+  function handleClick(e) {
+    e.preventDefault();
+    setDice(allNewDice());
+  }
+
+  console.log(dice);
 
   return (
     <div className="App text-center flex justify-center items-center ">
@@ -23,19 +30,12 @@ function App() {
             current value between rolls.
           </p>
           <div className="dice-container grid grid-cols-5 m-5 gap-y-5 gap-x-3 pointer">
-            <Die value="1" />
-            <Die value="2" />
-            <Die value="3" />
-            <Die value="4" />
-            <Die value="5" />
-            <Die value="6" />
-            <Die value="1" />
-            <Die value="3" />
-            <Die value="4" />
-            <Die value="5" />
+            {dice.map((die) => (
+              <Die value={die} />
+            ))}
           </div>
           <button
-            onClick={allNewDice}
+            onClick={handleClick}
             className="bg-[#5035FF] text-white rounded-md font-semibold w-[92px] h-[35px]"
           >
             Roll
