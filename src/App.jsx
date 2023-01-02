@@ -2,13 +2,22 @@ import { useEffect, useState } from 'react';
 import './App.css';
 import Die from './components/Die';
 
+/**
+ * Challenge: Update the array of numbers in state to be
+ * an array of objects instead. Each object should look like:
+ * { value: <random number>, isHeld: false }
+ *
+ * Making this change will break parts of our code, so make
+ * sure to update things so we're back to a working state
+ */
+
 function App() {
   const [dice, setDice] = useState(allNewDice());
 
   function allNewDice() {
     const newDice = [];
     for (let i = 0; i < 10; i++) {
-      newDice.push(Math.ceil(Math.random() * 6));
+      newDice.push({ value: Math.ceil(Math.random() * 6), isHeld: false });
     }
     return newDice;
   }
@@ -20,6 +29,8 @@ function App() {
 
   console.log(dice);
 
+  const diceElements = dice.map((die) => <Die value={die.value} />);
+
   return (
     <div className="App text-center flex justify-center items-center ">
       <div className="container w-[360px] bg-[#0b2434] ">
@@ -30,13 +41,11 @@ function App() {
             current value between rolls.
           </p>
           <div className="dice-container grid grid-cols-5 m-5 gap-y-5 gap-x-3 pointer">
-            {dice.map((die) => (
-              <Die value={die} />
-            ))}
+            {diceElements}
           </div>
           <button
             onClick={handleClick}
-            className="bg-[#5035FF] text-white rounded-md font-semibold w-[92px] h-[35px]"
+            className="bg-[#5035FF] text-white rounded-md font-semibold w-[100px] h-[50px] border-none hover:shadow-inner shadow-lg"
           >
             Roll
           </button>
