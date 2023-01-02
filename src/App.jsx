@@ -35,18 +35,6 @@ function App() {
     setDice(allNewDice());
   }
 
-  // console.log(dice);
-  // function holdDice(id) {
-  //   return dice.map((die, index) => {
-  //     if (die.id === id) {
-  //       // console.log(die);
-  //       setDice((prevDice) => {
-  //         return [...prevDice, {}];
-  //       });
-  //     }
-  //   });
-  // }
-
   function holdDice(id) {
     setDice((oldDice) =>
       oldDice.map((die) => {
