@@ -9,7 +9,7 @@ export default function Die(props) {
       <div
         className={`p-2 rounded-lg drop-shadow-md hover:bg-[#59E391] cursor-pointer`}
         style={styles}
-        onClick={props.isHeldHandler}
+        onClick={props.holdDice}
       >
         <h2 className="text-xl font-bold ">{props.value}</h2>
       </div>
