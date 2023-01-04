@@ -4,15 +4,13 @@ import Die from './components/Die';
 import { nanoid } from 'nanoid';
 
 /**
- * Challenge: Update the `holdDice` function to flip
- * the `isHeld` property on the object in the array
- * that was clicked, based on the `id` prop passed
- * into the function.
+ * Challenge: Update the `rollDice` function to not just roll
+ * all new dice, but instead to look through the existing dice
+ * to NOT role any that are being `held`.
  *
- * Hint: as usual, there's > 1 way to accomplish this.
- * I'll be using `dice.map()` and checking for the `id`
- * of the die to determine which one to flip `isHeld` on,
- * but you can do whichever way makes the most sense to you.
+ * Hint: this will look relatively similiar to the `holdDice`
+ * function below. When creating new dice, remember to use
+ * `id: nanoid()` so any new dice have an `id` as well.
  */
 
 function App() {
@@ -30,9 +28,16 @@ function App() {
     return newDice;
   }
 
-  function handleClick(e) {
-    e.preventDefault();
-    setDice(allNewDice());
+  // function rollDice() {
+  //   setDice(allNewDice());
+  // }
+
+  function rollDice(id) {
+    setDice((oldDice) => {
+      oldDice.map((die) => {
+        return die.id === id;
+      });
+    });
   }
 
   function holdDice(id) {
@@ -65,7 +70,7 @@ function App() {
             {diceElements}
           </div>
           <button
-            onClick={handleClick}
+            onClick={rollDice}
             className="bg-[#5035FF] text-white rounded-md font-semibold w-[100px] h-[50px] border-none hover:shadow-inner shadow-lg"
           >
             Roll
