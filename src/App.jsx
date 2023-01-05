@@ -39,9 +39,9 @@ function App() {
         return die.isHeld
           ? { ...die }
           : {
-              value: Math.floor(Math.random() * 6) + 1,
+              value: Math.ceil(Math.random() * 6),
               isHeld: false,
-              id: die.id,
+              id: nanoid(),
             };
       });
     });
