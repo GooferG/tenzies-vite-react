@@ -32,10 +32,17 @@ function App() {
   //   setDice(allNewDice());
   // }
 
-  function rollDice(id) {
+  function rollDice() {
     setDice((oldDice) => {
-      oldDice.map((die) => {
-        return die.id === id;
+      console.log(oldDice);
+      return oldDice.map((die) => {
+        return die.isHeld
+          ? { ...die }
+          : {
+              value: Math.floor(Math.random() * 6) + 1,
+              isHeld: false,
+              id: die.id,
+            };
       });
     });
   }
