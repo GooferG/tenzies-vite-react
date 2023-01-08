@@ -3,18 +3,23 @@ import './App.css';
 import Die from './components/Die';
 import { nanoid } from 'nanoid';
 
+import useWindowSize from 'react-use/lib/useWindowSize';
+import Confetti from 'react-confetti';
+
 /**
- * Challenge: Check the dice array for these winning conditions:
- * 1. All dice are held, and
- * 2. all dice have the same value
+ * Challenge: Tie off loose ends!
+ * 1. If tenzies is true, Change the button text to "New Game"
+ * 2. If tenzies is true, use the "react-confetti" package to
+ *    render the <Confetti /> component 🎉
  *
- * If both conditions are true, set `tenzies` to true and log
- * "You won!" to the console
+ *    Hint: don't worry about the `height` and `width` props
+ *    it mentions in the documentation.
  */
 
 function App() {
   const [dice, setDice] = useState(allNewDice());
   const [tenzies, setTenzies] = useState(false);
+  const { width, height } = useWindowSize();
 
   useEffect(() => {
     const allHeld = dice.every((die) => die.isHeld);
@@ -65,7 +70,8 @@ function App() {
   ));
 
   return (
-    <div className="App text-center flex justify-center items-center ">
+    <main className="App text-center flex justify-center items-center ">
+      {tenzies && <Confetti width={width} height={height} />}
       <div className="container w-[360px] bg-[#0b2434] ">
         <div className="game-container py-10 px-5 bg-[#f5f5f5] m-5 rounded-md ">
           <h1 className="text-[24px] font-medium">Tenzies</h1>
@@ -80,11 +86,11 @@ function App() {
             onClick={rollDice}
             className="bg-[#5035FF] text-white rounded-md font-semibold w-[100px] h-[50px] border-none hover:shadow-inner shadow-lg"
           >
-            Roll
+            {tenzies ? 'New Game' : 'Roll'}
           </button>
         </div>
       </div>
-    </div>
+    </main>
   );
 }
 
