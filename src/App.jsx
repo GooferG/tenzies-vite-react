@@ -7,6 +7,7 @@ import useWindowSize from 'react-use/lib/useWindowSize';
 import Confetti from 'react-confetti';
 
 /**
+ * What else to do:
  * 1) Track number of rolls
  * 2) How long did it take to win?
  * 3) Save the best time in local storage
