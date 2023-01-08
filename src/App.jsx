@@ -4,11 +4,12 @@ import Die from './components/Die';
 import { nanoid } from 'nanoid';
 
 /**
- * Challenge:
- * 1. Add new state called `tenzies`, default to false. It
- *    represents whether the user has won the game yet or not.
- * 2. Add an effect that runs every time the `dice` state array
- *    changes. For now, just console.log("Dice state changed").
+ * Challenge: Check the dice array for these winning conditions:
+ * 1. All dice are held, and
+ * 2. all dice have the same value
+ *
+ * If both conditions are true, set `tenzies` to true and log
+ * "You won!" to the console
  */
 
 function App() {
@@ -16,7 +17,13 @@ function App() {
   const [tenzies, setTenzies] = useState(false);
 
   useEffect(() => {
-    console.log('dice state changed');
+    const allHeld = dice.every((die) => die.isHeld);
+    const firstValue = dice[0].value;
+    const allValuesEqual = dice.every((die) => die.value === firstValue);
+    if (allHeld && allValuesEqual) {
+      setTenzies(true);
+      console.log('You won!');
+    }
   }, [dice]);
 
   function generateNewDie() {
